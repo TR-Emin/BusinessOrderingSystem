@@ -17,10 +17,40 @@ namespace BOS.Admin.Api.Controllers
         }
 
         [HttpPost]
-        [Route("AddTest")]
-        public ServiceResponse<Test> AddTest([FromBody] Test test)
+        [Route("Add")]
+        public ServiceResponse<Test> Add([FromBody] Test test)
         {
-            return _testBusinessUnit.AddTest(test);
+            return _testBusinessUnit.Add(test);
         }
+
+        [HttpPut]
+        [Route("Update")]
+        public ServiceResponse<Test> Update([FromBody] Test test)
+        {
+            return _testBusinessUnit.Update(test);
+        }
+
+        [HttpDelete]
+        [Route("Delete")]
+        public ServiceResponse<Test> Delete([FromBody] Test test)
+        {
+            return _testBusinessUnit.Delete(test);
+        }
+
+        [HttpGet]
+        [Route("GetById")]
+        public ServiceResponse<Test> GetById([FromBody] int testId)
+        {
+            return _testBusinessUnit.GetById(testId);
+        }
+
+        [HttpGet]
+        [Route("GetList")]
+        public ServiceResponse<List<Test>> GetList()
+        {
+            return _testBusinessUnit.GetList();
+        }
+
+
     }
 }
