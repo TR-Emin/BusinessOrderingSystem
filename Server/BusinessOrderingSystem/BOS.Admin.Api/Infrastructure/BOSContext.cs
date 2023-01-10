@@ -21,6 +21,11 @@ namespace BOS.Admin.Api.Infrastructure
         }
 
         public virtual DbSet<Test> Tests { get; set; } = null!;
+        public virtual DbSet<Branch> Branches { get; set; } = null!;
+        public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Tenant> Tenants { get; set; } = null!;
+
 
     }
 }
