@@ -1,6 +1,8 @@
 using BOS.Admin.Api.BusinessUnit;
 using BOS.Admin.Api.DataAccess;
 using BOS.Admin.Api.Infrastructure;
+using BOS.Admin.Api.Infrastructure.Model;
+using BOS.Admin.Api.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,9 +21,28 @@ builder.Services.AddDbContext<BOSContext>(options =>
 
 
 
+builder.Services.AddTransient<IGenericRepository<Branch>, GenericRepository<Branch>>();
+builder.Services.AddTransient<IGenericRepository<Category>, GenericRepository<Category>>();
+builder.Services.AddTransient<IGenericRepository<Product>, GenericRepository<Product>>();
+builder.Services.AddTransient<IGenericRepository<Tenant>, GenericRepository<Tenant>>();
+builder.Services.AddTransient<IGenericRepository<Test>, GenericRepository<Test>>();
 
 builder.Services.AddTransient<ITestBusinessUnit, TestBusinessUnit>();
 builder.Services.AddTransient<ITestDataAccess, TestDataAccess>();
+
+builder.Services.AddTransient<IBranchDataAccess, BranchDataAccess>();
+builder.Services.AddTransient<IBranchBusinessUnit, BranchBusinessUnit>();
+
+builder.Services.AddTransient<ICategoryDataAccess, CategoryDataAccess>();
+builder.Services.AddTransient<ICategoryBusinessUnit, CategoryBusinessUnit>();
+
+builder.Services.AddTransient<IProductDataAccess, ProductDataAccess>();
+builder.Services.AddTransient<IProductBusinessUnit, ProductBusinessUnit>();
+
+
+
+
+
 
 
 
