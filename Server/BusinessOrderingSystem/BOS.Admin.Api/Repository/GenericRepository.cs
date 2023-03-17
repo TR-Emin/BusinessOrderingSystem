@@ -5,14 +5,14 @@ namespace BOS.Admin.Api.Repository
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task AddAsync(T entity);
+        Task<int> AddAsync(T entity);
         Task<T> GetByIdAsync(int id);
         Task<List<T>> GetListAsync();
         Task<int> SaveChangesAsync();
 
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        int Add(T entity);
+        int Update(T entity);
+        int Delete(T entity);
         T GetById(int id);
         List<T> GetList();
         int SaveChanges();
@@ -27,24 +27,28 @@ namespace BOS.Admin.Api.Repository
             _bOSContext = bOSContext;
         }
 
-        public void Add(T entity)
+        public int Add(T entity)
         {
             _bOSContext.Set<T>().Add(entity);
+            return _bOSContext.SaveChanges();
         }
-        public async Task AddAsync(T entity)
+        public async Task<int> AddAsync(T entity)
         {
             await _bOSContext.Set<T>().AddAsync(entity);
+            return await _bOSContext.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public int Update(T entity)
         {
             _bOSContext.Set<T>().Update(entity);
+            return _bOSContext.SaveChanges();
         }
 
-        public void Delete(T entity)
+        public int Delete(T entity)
         {
             //T existing = _bOSContext.Set<T>().Find(id);
             _bOSContext.Set<T>().Remove(entity);
+            return _bOSContext.SaveChanges();
         }
 
         public T GetById(int id)
@@ -53,7 +57,12 @@ namespace BOS.Admin.Api.Repository
         }
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _bOSContext.Set<T>().FindAsync(id);
+            var entity = await _bOSContext.Set<T>().FindAsync(id);
+            if (entity != null)
+            {
+                _bOSContext.Entry(entity).State = EntityState.Detached; // FindAsync() ile beraber AsNoTracking() kullanamadığımdan dolayı obje izleme hatası çözümü bu şekilde çözülmüştür.
+            }
+            return entity;
         }
 
         public List<T> GetList()
