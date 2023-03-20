@@ -11,6 +11,7 @@ namespace BOS.Admin.Api.BusinessUnit
         ServiceResponse Update(Branch branch);
         ServiceResponse Delete(Branch branch);
         Task<ServiceResponse<Branch>> GetByIdAsync(int id);
+        Task<ServiceResponse<List<Branch>>> GetListAsync();
 
     }
 
@@ -79,6 +80,16 @@ namespace BOS.Admin.Api.BusinessUnit
                 return new ServiceResponse<Branch>(ResponseCode.NotFound, "Not found Branch object");
             }
             return new ServiceResponse<Branch>(ResponseCode.Success, branch);
+        }
+
+        public async Task<ServiceResponse<List<Branch>>> GetListAsync()
+        {
+            var branchList = await _branchDataAccess.GetListAsync();
+            if (branchList == null)
+            {
+                return new ServiceResponse<List<Branch>>(ResponseCode.NotFound, "Not found Branch object");
+            }
+            return new ServiceResponse<List<Branch>>(ResponseCode.Success, branchList);
         }
 
     }

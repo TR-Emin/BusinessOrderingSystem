@@ -11,6 +11,7 @@ namespace BOS.Admin.Api.BusinessUnit
         ServiceResponse Update(Category category);
         ServiceResponse Delete(Category category);
         Task<ServiceResponse<Category>> GetByIdAsync(int id);
+        Task<ServiceResponse<List<Category>>> GetListAsync();
     }
 
     public class CategoryBusinessUnit : ICategoryBusinessUnit
@@ -77,6 +78,16 @@ namespace BOS.Admin.Api.BusinessUnit
                 return new ServiceResponse<Category>(ResponseCode.NotFound, "Not found Category object");
             }
             return new ServiceResponse<Category>(ResponseCode.Success, category);
+        }
+
+        public async Task<ServiceResponse<List<Category>>> GetListAsync()
+        {
+            var categoryList = await _categoryDataAccess.GetListAsync();
+            if (categoryList == null)
+            {
+                return new ServiceResponse<List<Category>>(ResponseCode.NotFound, "Not found Category object");
+            }
+            return new ServiceResponse<List<Category>>(ResponseCode.Success, categoryList);
         }
     }
 }

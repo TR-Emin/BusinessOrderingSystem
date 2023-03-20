@@ -11,6 +11,7 @@ namespace BOS.Admin.Api.BusinessUnit
         ServiceResponse Update(Product product);
         ServiceResponse Delete(Product product);
         Task<ServiceResponse<Product>> GetByIdAsync(int id);
+        Task<ServiceResponse<List<Product>>> GetListAsync();
     }
     public class ProductBusinessUnit : IProductBusinessUnit
     {
@@ -76,6 +77,16 @@ namespace BOS.Admin.Api.BusinessUnit
                 return new ServiceResponse<Product>(ResponseCode.NotFound, "Not found Product object");
             }
             return new ServiceResponse<Product>(ResponseCode.Success, product);
+        }
+
+        public async Task<ServiceResponse<List<Product>>> GetListAsync()
+        {
+            var productList = await _productDataAccess.GetListAsync();
+            if (productList == null)
+            {
+                return new ServiceResponse<List<Product>>(ResponseCode.NotFound, "Not found Product object");
+            }
+            return new ServiceResponse<List<Product>>(ResponseCode.Success, productList);
         }
     }
 }

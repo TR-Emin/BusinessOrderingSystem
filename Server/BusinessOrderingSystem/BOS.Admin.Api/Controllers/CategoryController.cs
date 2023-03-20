@@ -43,5 +43,12 @@ namespace BOS.Admin.Api.Controllers
         {
             return await _categoryBusinessUnit.GetByIdAsync(id);
         }
+
+        [HttpGet]
+        [Route("GetListAsync")]
+        public async Task<ServiceResponse<List<Category>>> GetListAsync()
+        {
+            return await _categoryBusinessUnit.GetListAsync();
+        }
     }
 }
