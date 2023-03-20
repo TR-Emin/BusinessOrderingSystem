@@ -11,6 +11,9 @@
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.2",
     "core-js": "^3.6.5",
+    "primeicons": "^6.0.1",
+    "primevue": "^3.26.0",
+    "toast": "^0.5.4",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.0-0"

@@ -63,6 +63,33 @@ export interface Branch {
 /**
  * 
  * @export
+ * @interface BranchListServiceResponse
+ */
+export interface BranchListServiceResponse {
+    /**
+     * 
+     * @type {ResponseCode}
+     * @memberof BranchListServiceResponse
+     */
+    'responseCode'?: ResponseCode;
+    /**
+     * 
+     * @type {string}
+     * @memberof BranchListServiceResponse
+     */
+    'message'?: string | null;
+    /**
+     * 
+     * @type {Array<Branch>}
+     * @memberof BranchListServiceResponse
+     */
+    'data'?: Array<Branch> | null;
+}
+
+
+/**
+ * 
+ * @export
  * @interface BranchServiceResponse
  */
 export interface BranchServiceResponse {
@@ -127,6 +154,33 @@ export interface Category {
 /**
  * 
  * @export
+ * @interface CategoryListServiceResponse
+ */
+export interface CategoryListServiceResponse {
+    /**
+     * 
+     * @type {ResponseCode}
+     * @memberof CategoryListServiceResponse
+     */
+    'responseCode'?: ResponseCode;
+    /**
+     * 
+     * @type {string}
+     * @memberof CategoryListServiceResponse
+     */
+    'message'?: string | null;
+    /**
+     * 
+     * @type {Array<Category>}
+     * @memberof CategoryListServiceResponse
+     */
+    'data'?: Array<Category> | null;
+}
+
+
+/**
+ * 
+ * @export
  * @interface CategoryServiceResponse
  */
 export interface CategoryServiceResponse {
@@ -188,6 +242,33 @@ export interface Product {
      */
     'isInStock'?: boolean;
 }
+/**
+ * 
+ * @export
+ * @interface ProductListServiceResponse
+ */
+export interface ProductListServiceResponse {
+    /**
+     * 
+     * @type {ResponseCode}
+     * @memberof ProductListServiceResponse
+     */
+    'responseCode'?: ResponseCode;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProductListServiceResponse
+     */
+    'message'?: string | null;
+    /**
+     * 
+     * @type {Array<Product>}
+     * @memberof ProductListServiceResponse
+     */
+    'data'?: Array<Product> | null;
+}
+
+
 /**
  * 
  * @export
@@ -472,6 +553,35 @@ export const BranchApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminapiBranchGetListAsyncGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/adminapi/Branch/GetListAsync`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {Branch} [branch] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -545,6 +655,15 @@ export const BranchApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminapiBranchGetListAsyncGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BranchListServiceResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminapiBranchGetListAsyncGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {Branch} [branch] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -589,6 +708,14 @@ export const BranchApiFactory = function (configuration?: Configuration, basePat
          */
         adminapiBranchGetByIdAsyncGet(body?: number, options?: any): AxiosPromise<BranchServiceResponse> {
             return localVarFp.adminapiBranchGetByIdAsyncGet(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminapiBranchGetListAsyncGet(options?: any): AxiosPromise<BranchListServiceResponse> {
+            return localVarFp.adminapiBranchGetListAsyncGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -640,6 +767,16 @@ export class BranchApi extends BaseAPI {
      */
     public adminapiBranchGetByIdAsyncGet(body?: number, options?: AxiosRequestConfig) {
         return BranchApiFp(this.configuration).adminapiBranchGetByIdAsyncGet(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BranchApi
+     */
+    public adminapiBranchGetListAsyncGet(options?: AxiosRequestConfig) {
+        return BranchApiFp(this.configuration).adminapiBranchGetListAsyncGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -762,6 +899,35 @@ export const CategoryApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminapiCategoryGetListAsyncGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/adminapi/Category/GetListAsync`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {Category} [category] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -835,6 +1001,15 @@ export const CategoryApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminapiCategoryGetListAsyncGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CategoryListServiceResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminapiCategoryGetListAsyncGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {Category} [category] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -879,6 +1054,14 @@ export const CategoryApiFactory = function (configuration?: Configuration, baseP
          */
         adminapiCategoryGetByIdAsyncGet(body?: number, options?: any): AxiosPromise<CategoryServiceResponse> {
             return localVarFp.adminapiCategoryGetByIdAsyncGet(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminapiCategoryGetListAsyncGet(options?: any): AxiosPromise<CategoryListServiceResponse> {
+            return localVarFp.adminapiCategoryGetListAsyncGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -930,6 +1113,16 @@ export class CategoryApi extends BaseAPI {
      */
     public adminapiCategoryGetByIdAsyncGet(body?: number, options?: AxiosRequestConfig) {
         return CategoryApiFp(this.configuration).adminapiCategoryGetByIdAsyncGet(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CategoryApi
+     */
+    public adminapiCategoryGetListAsyncGet(options?: AxiosRequestConfig) {
+        return CategoryApiFp(this.configuration).adminapiCategoryGetListAsyncGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1052,6 +1245,35 @@ export const ProductApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminapiProductGetListAsyncGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/adminapi/Product/GetListAsync`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {Product} [product] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1125,6 +1347,15 @@ export const ProductApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async adminapiProductGetListAsyncGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductListServiceResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.adminapiProductGetListAsyncGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {Product} [product] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1169,6 +1400,14 @@ export const ProductApiFactory = function (configuration?: Configuration, basePa
          */
         adminapiProductGetByIdAsyncGet(body?: number, options?: any): AxiosPromise<ProductServiceResponse> {
             return localVarFp.adminapiProductGetByIdAsyncGet(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        adminapiProductGetListAsyncGet(options?: any): AxiosPromise<ProductListServiceResponse> {
+            return localVarFp.adminapiProductGetListAsyncGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1220,6 +1459,16 @@ export class ProductApi extends BaseAPI {
      */
     public adminapiProductGetByIdAsyncGet(body?: number, options?: AxiosRequestConfig) {
         return ProductApiFp(this.configuration).adminapiProductGetByIdAsyncGet(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductApi
+     */
+    public adminapiProductGetListAsyncGet(options?: AxiosRequestConfig) {
+        return ProductApiFp(this.configuration).adminapiProductGetListAsyncGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
